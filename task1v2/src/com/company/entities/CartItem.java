@@ -51,9 +51,9 @@ public class CartItem extends Product{
         this.quantityItem = quantityItem;
     }
 
-    public CartItem(int id, int quantity, String supplierName, String article, String name, String price, int id1, int quantityItem) {
-        super(id, quantity, supplierName, article, name, price);
-        this.id = id1;
+    public CartItem(int idProduct, int quantity, String supplierName, String article, String name, float price, int id, int quantityItem) {
+        super(idProduct, quantity, supplierName, article, name, price);
+        this.id = id;
         this.quantityItem = quantityItem;
     }
 }

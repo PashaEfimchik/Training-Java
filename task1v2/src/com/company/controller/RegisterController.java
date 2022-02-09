@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegisterController{
+public class RegisterController {
     User userRegister = new User();
     List<User> userList = new ArrayList<>();
+
     public void register () {
         try(Scanner scanner = new Scanner(System.in)) {
             System.out.println("Enter id: ");
@@ -20,7 +21,6 @@ public class RegisterController{
             System.out.println("Enter password: ");
             userRegister.setPassword(scanner.nextLine());
             //System.out.println("Enter confirm password: ");
-
             userList.add(userRegister);
         }
     }
