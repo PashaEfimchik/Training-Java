@@ -3,14 +3,16 @@ package com.company.entities;
 import java.util.Objects;
 
 public class CartItem extends Product{
-    private int id;
+    private int idCart;
     private int quantityItem;
+    private float totalPrice;
 
     @Override
-    public String   toString() {
+    public String toString() {
         return "CartItem{" +
-                "id=" + id +
+                "idCart=" + idCart +
                 ", quantityItem=" + quantityItem +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 
@@ -20,22 +22,20 @@ public class CartItem extends Product{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CartItem cartItem = (CartItem) o;
-        return id == cartItem.id && quantityItem == cartItem.quantityItem;
+        return idCart == cartItem.idCart && quantityItem == cartItem.quantityItem && Float.compare(cartItem.totalPrice, totalPrice) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, quantityItem);
+        return Objects.hash(super.hashCode(), idCart, quantityItem, totalPrice);
     }
 
-    @Override
-    public int getId() {
-        return id;
+    public int getIdCart() {
+        return idCart;
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCart(int idCart) {
+        this.idCart = idCart;
     }
 
     public int getQuantityItem() {
@@ -46,14 +46,24 @@ public class CartItem extends Product{
         this.quantityItem = quantityItem;
     }
 
-    public CartItem(int id, int quantityItem) {
-        this.id = id;
-        this.quantityItem = quantityItem;
+    public float getTotalPrice() {
+        return totalPrice;
     }
 
-    public CartItem(int idProduct, int quantity, String supplierName, String article, String name, float price, int id, int quantityItem) {
-        super(idProduct, quantity, supplierName, article, name, price);
-        this.id = id;
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public CartItem(int idCart, int quantityItem, float totalPrice) {
+        this.idCart = idCart;
         this.quantityItem = quantityItem;
+        this.totalPrice = totalPrice;
+    }
+
+    public CartItem(int id, int quantity, String supplierName, String article, String name, float price, int idCart, int quantityItem, float totalPrice) {
+        super(id, quantity, supplierName, article, name, price);
+        this.idCart = idCart;
+        this.quantityItem = quantityItem;
+        this.totalPrice = totalPrice;
     }
 }

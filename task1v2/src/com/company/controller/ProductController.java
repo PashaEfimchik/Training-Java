@@ -3,15 +3,16 @@ package com.company.controller;
 import com.company.dao.ProductDAO;
 import com.company.dao.ProductDAOException;
 import com.company.entities.Product;
+import com.company.services.ProductDAOImpl;
 
 import java.util.Scanner;
 
 public abstract class ProductController {
     private Scanner input;
 
-    private ProductDAO productDAO;
+    private ProductDAOImpl productDAO;
 
-    private void addProduct() throws ProductDAOException {
+    private void addProduct() {
         while (true) {
             Product product = new Product();
 
@@ -37,7 +38,7 @@ public abstract class ProductController {
         }
     }
 
-    public void showAllProducts() throws ProductDAOException {
+    public void showAllProducts() {
         System.out.println("\n\t - Catalog - \n");
         System.out.println("id\t\t" + "Article\t\t" + "Name\t\t" + "Supplier name\t\t" + "Price($)\t\t" + "Quantity\t\t");
         for (Product p : productDAO.selectAllProduct()) {
@@ -46,19 +47,19 @@ public abstract class ProductController {
         }
     }
 
-    private void productById () throws ProductDAOException {
+    private void productById () {
         System.out.println("Input id for searching product: ");
         Product p = productDAO.productById(input.nextInt());
         System.out.println(p.getId() + "\t" + p.getArticle() + "\t" + p.getName() + "\t" + p.getPrice() + "\t" + p.getQuantity());
     }
 
-    private void removeProduct () throws ProductDAOException {
+    private void removeProduct () {
         showAllProducts();
         System.out.println("Enter product id for delete: ");
         productDAO.removeProductById(input.nextInt());
     }
 
-    public void searchProduct() throws ProductDAOException {
+    public void searchProduct() {
         System.out.println("Enter attribute for searching: ");
         for (Product p : productDAO.searchProduct(input.next())){
             System.out.println(p.getId() + "\t" + p.getArticle() + "\t" + p.getName() + "\t" + p.getPrice() + "\t" + p.getQuantity());
