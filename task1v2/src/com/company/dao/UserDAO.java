@@ -9,7 +9,7 @@ public interface UserDAO {
 
     boolean removeUserById(int id) throws UserDAOException;
 
-    void uploadUsers () throws UserDAOException;
+    void uploadUsers (List<User> userList) throws UserDAOException;
 
     User userById (int id) throws UserDAOException;
 

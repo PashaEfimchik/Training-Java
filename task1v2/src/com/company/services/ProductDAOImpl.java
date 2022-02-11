@@ -26,7 +26,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public List<Product> selectAllProduct () {
+    public List<Product> selectAllProduct (List<Product> listProduct) {
         return productList;
     }
 
@@ -34,7 +34,7 @@ public class ProductDAOImpl implements ProductDAO {
     public List<Product> searchProduct (String par) {
         List<Product> searchProductList = new ArrayList<>();
         for (Product p : productList) {
-            if (p.getName().contains(par)){
+            if (p.getName().contains(par) || p.getArticle().contains(par) || p.getSupplierName().contains(par)){
                 searchProductList.add(p);
             }
         }
@@ -44,7 +44,6 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public boolean removeProductById (int id) {
         Product p = productById(id);
-
         if (p != null) {
             return productList.remove(p);
         }
@@ -52,5 +51,5 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void uploadProducts() {}
+    public void uploadProducts(List<Product> listProduct) {}
 }

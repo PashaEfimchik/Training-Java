@@ -5,11 +5,12 @@ import com.company.dao.ProductDAOException;
 import com.company.entities.Product;
 import com.company.services.ProductDAOImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class ProductController {
     private Scanner input;
-
+    public List<Product> productList;
     private ProductDAOImpl productDAO;
 
     private void addProduct() {
@@ -41,7 +42,7 @@ public abstract class ProductController {
     public void showAllProducts() {
         System.out.println("\n\t - Catalog - \n");
         System.out.println("id\t\t" + "Article\t\t" + "Name\t\t" + "Supplier name\t\t" + "Price($)\t\t" + "Quantity\t\t");
-        for (Product p : productDAO.selectAllProduct()) {
+        for (Product p : productDAO.selectAllProduct(productList)) {
             System.out.println(p.getId() + "\t\t" + p.getArticle() + "\t\t" + p.getName() + "\t\t" + p.getSupplierName() + "\t\t" +
             p.getPrice() + "\t\t" + p.getQuantity());
         }

@@ -9,11 +9,11 @@ public interface ProductDAO {
 
     boolean removeProductById (int id) throws ProductDAOException;
 
-    void uploadProducts () throws ProductDAOException;
+    void uploadProducts (List<Product> listProduct) throws ProductDAOException;
 
     Product productById (int id) throws ProductDAOException;
 
-    List<Product> selectAllProduct () throws ProductDAOException;
+    List<Product> selectAllProduct (List<Product> listProduct) throws ProductDAOException;
 
     List<Product> searchProduct (String par) throws ProductDAOException;
 

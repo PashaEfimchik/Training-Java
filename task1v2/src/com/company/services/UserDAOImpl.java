@@ -48,10 +48,11 @@ public class UserDAOImpl implements UserDAO {
         if (user != null){
             return userList.remove(user);
         }
-
         return false;
     }
 
     @Override
-    public void uploadUsers() {}
+    public void uploadUsers(List<User> listUser) {
+
+    }
 }

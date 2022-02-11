@@ -1,13 +1,14 @@
 package com.company;
 
 import com.company.controller.LoginController;
+import com.company.dao.UserDAOException;
 import com.company.entities.User;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Start {
-    public void startMenu() throws IOException {
+    public void startMenu() throws IOException, UserDAOException {
         Scanner input = new Scanner(System.in);
         LoginController login = new LoginController();
         while (true) {
