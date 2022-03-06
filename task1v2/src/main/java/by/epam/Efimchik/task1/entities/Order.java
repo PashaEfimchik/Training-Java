@@ -10,6 +10,11 @@ public class Order{
     private int orderQuantity;
     private OrderStatus orderStatus;
 
+    public static int orderObjectCounter = 0;
+    {
+        orderObjectCounter++;
+    }
+
     public Order() {}
 
     public Order(int orderId, Product product, User user, float orderTotal, int orderQuantity, OrderStatus orderStatus) {

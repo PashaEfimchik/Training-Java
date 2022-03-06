@@ -1,13 +1,19 @@
 package by.epam.Efimchik.task1.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     private int productId;
     private String article;
     private String name;
     private String supplierName;
     private float productPrice;
+
+    public static int productObjectCounter = 0;
+    {
+        productObjectCounter++;
+    }
 
     public Product() {}
 

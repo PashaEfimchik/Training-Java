@@ -5,6 +5,7 @@ import by.epam.Efimchik.task1.dao.UserDAO;
 import by.epam.Efimchik.task1.entities.User;
 import by.epam.Efimchik.task1.utils.InitializationUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class UserDAOImpl implements UserDAO<User> {
     private static List<User> userList = new ArrayList<>();
 
-    public UserDAOImpl() {
+    public UserDAOImpl() throws IOException, ClassNotFoundException {
         InitializationUtil initializationUtil = new InitializationUtil();
         initializationUtil.uploadUsers(userList);
     }
@@ -46,6 +47,7 @@ public class UserDAOImpl implements UserDAO<User> {
         }
         return null;
     }
+
     @Override
     public User searchUser(String username, String password) throws DAOException {
         for (User user : userList) {
@@ -100,5 +102,12 @@ public class UserDAOImpl implements UserDAO<User> {
             return user.getUsername().equals(username) && user.getPassword().equals(password);
         }
         return false;
+    }
+
+    public boolean isAdminUsername(String username) {
+        return username.equals("admin");
+    }
+    public boolean isAdminPassword(String password) {
+        return password.equals("admin");
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO<Order> {
-    private List<Order> orderList = new ArrayList<>();
+    private static List<Order> orderList = new ArrayList<>();
 
     @Override
     public void addToOrder(Order order) throws DAOException {

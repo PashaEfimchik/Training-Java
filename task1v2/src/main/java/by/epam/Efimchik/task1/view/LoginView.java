@@ -8,66 +8,67 @@ import by.epam.Efimchik.task1.services.UserService;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class LoginView {
-    UserService userService = new UserService();
-    UserDAOImpl userDAO = new UserDAOImpl();
-    UserView userView = new UserView();
-    Scanner input = new Scanner(System.in);
+    final Logger logger = Logger.getLogger(LoginView.class);
+    private UserService userService = new UserService();
+    private UserDAOImpl userDAO = new UserDAOImpl();
+    private ValidData validData = new ValidData();
+    private UserView userView = new UserView();
+    private Scanner input = new Scanner(System.in);
 
-    public void registerUser() throws DAOException, IOException {
-        System.out.println(" - Register new User -");
-        while (true) {
-            User user = new User();
-            System.out.println("\nInput id: ");
-            user.setUserId(input.nextInt());
-            System.out.println("\nInput e-mail: ");
-            String email = input.next();
-            if (userService.isValidEmail(email) && !userDAO.isEmailExist(email)) {
-                user.setEmail(email);
-            }
-            else {
-                System.out.println("User with this email already exists.");
-            }
-            System.out.println("\nInput username: ");
-            String username = input.next();
-            if (userService.isValidUsername(username) && !userDAO.isUsernameExist(username)) {
-                user.setUsername(username);
-            }
-            else {
-                System.out.println("User with this username already exists.");
-            }
-            System.out.println("\nInput password: ");
-            String password = input.next();
-            if (userService.isValidPassword(password)) {
-                user.setPassword(password);
-            }
+    public LoginView() throws IOException, ClassNotFoundException {
+    }
 
-            userService.addUser(user);
+    public void registerUser() throws DAOException, IOException, ClassNotFoundException {
+        logger.info(" - Sign up new User - ");
+        User user = new User();
 
-            System.out.println("Add more [y/n] ?");
-            if (input.next().equalsIgnoreCase("n")) {
-                break;
-            }
-            if (userService.showAllUsers().contains(user)) {
-                user.setUserSession(true);
-                userView.userMenu(user);
-            }
+        logger.info("Enter id: ");
+        user.setUserId(validData.isValidInteger(input.next()));
+
+        logger.info("Enter e-mail: ");
+        user.setEmail(validData.isValidEmail(input.next()));
+
+        logger.info("Enter username: ");
+        user.setUsername(validData.isValidUsername(input.next()));
+
+        logger.info("Enter password: ");
+        user.setPassword(validData.isValidPassword(input.next()));
+
+        userService.addUser(user);
+
+        if (userService.showAllUsers().contains(user)) {
+            user.setUserSession(true);
+            userView.userMenu(user);
         }
     }
 
-    public void loginUser() throws DAOException, IOException {
-        System.out.println("Enter username: ");
+
+
+    public void loginUser() throws DAOException, IOException, ClassNotFoundException {
+        logger.info("Enter username: ");
         String username = input.next();
-        if (userDAO.isUsernameExist(username)) {
-            System.out.println("Enter password: ");
+        if (userDAO.isUsernameExist(username) && !userDAO.isAdminUsername(username)) {
+            logger.info("Enter password: ");
             String password = input.next();
-            if (userDAO.isPasswordExist(username, password)){
-                System.out.println("User successfully logged in");
+            if (userDAO.isPasswordExist(username, password)) {
+                logger.info("User - " + username + " - successfully logged in\n");
                 User user = userService.searchUser(username, password);
                 if (userService.showAllUsers().contains(user)) {
                     user.setUserSession(true);
                     userView.userMenu(user);
                 }
+            }
+        }
+        if (userDAO.isAdminUsername(username)) {
+            logger.info("Enter password: ");
+            String password = input.next();
+            if (userDAO.isAdminPassword(password)) {
+                logger.info("Admin successfully logged in\n");
+                EmployeeMenuView employeeMenuView = new EmployeeMenuView();
+                employeeMenuView.adminMenu();
             }
         }
     }

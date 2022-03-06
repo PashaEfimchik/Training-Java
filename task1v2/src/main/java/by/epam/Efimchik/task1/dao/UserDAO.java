@@ -12,7 +12,7 @@ public interface UserDAO <T> {
 
     void remove(int id) throws DAOException;
 
-    T userById(int id) throws DAOException;
+    User userById(int id) throws DAOException;
 
     List<T> allUsers() throws DAOException;
 

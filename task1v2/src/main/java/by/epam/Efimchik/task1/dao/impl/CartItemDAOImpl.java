@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CartItemDAOImpl implements CartItemDAO<CartItem> {
-    private List<CartItem> cartItemList = new ArrayList<>();
+    private static List<CartItem> cartItemList = new ArrayList<>();
 
     public CartItemDAOImpl() { }
 

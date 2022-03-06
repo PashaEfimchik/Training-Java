@@ -1,13 +1,19 @@
 package by.epam.Efimchik.task1.entities;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class CartItem {
+public class CartItem implements Comparator<CartItem> {
     private int id;
     private int quantityItem;
     private float totalPrice;
     private Product product;
     private User user;
+
+    public static int cartItemObjectCounter = 0;
+    {
+        cartItemObjectCounter++;
+    }
 
     public CartItem() { }
 
@@ -20,6 +26,19 @@ public class CartItem {
                 ", product=" + product +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public int compare(CartItem o1, CartItem o2) {
+        if (o1.totalPrice == o2.totalPrice) {
+            return 0;
+        }
+        if (o1.totalPrice > o2.totalPrice) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 
     @Override
@@ -82,4 +101,5 @@ public class CartItem {
         this.product = product;
         this.user = user;
     }
+
 }

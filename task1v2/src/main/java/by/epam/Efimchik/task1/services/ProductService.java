@@ -4,10 +4,14 @@ import by.epam.Efimchik.task1.dao.DAOException;
 import by.epam.Efimchik.task1.dao.impl.ProductDAOImpl;
 import by.epam.Efimchik.task1.entities.Product;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ProductService {
     private ProductDAOImpl productDAO = new ProductDAOImpl();
+
+    public ProductService() throws IOException, ClassNotFoundException {
+    }
 
     public void addProduct(Product Product) throws DAOException {
         productDAO.add(Product);

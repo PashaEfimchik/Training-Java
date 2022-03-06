@@ -1,13 +1,19 @@
 package by.epam.Efimchik.task1.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
     private int userId;
     private String email;
     private String username;
     private String password;
     private boolean userSession = false;
+
+    public static int userObjectCounter = 0;
+    {
+        userObjectCounter++;
+    }
 
     public User () {}
 

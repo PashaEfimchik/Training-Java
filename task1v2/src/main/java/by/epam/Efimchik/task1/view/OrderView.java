@@ -2,24 +2,28 @@ package by.epam.Efimchik.task1.view;
 
 import by.epam.Efimchik.task1.dao.DAOException;
 import by.epam.Efimchik.task1.entities.*;
-import by.epam.Efimchik.task1.services.CartService;
 import by.epam.Efimchik.task1.services.OrderService;
 import by.epam.Efimchik.task1.services.ProductService;
-import by.epam.Efimchik.task1.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 public class OrderView {
+    final Logger logger = Logger.getLogger(OrderView.class);
     OrderService orderService = new OrderService();
-    UserService userService = new UserService();
     ProductService productService = new ProductService();
-    CartService cartService = new CartService();
+    private static int orderId = 1;
     Scanner input = new Scanner(System.in);
+
+    public OrderView() throws IOException, ClassNotFoundException {
+    }
 
     public void addOrder(Product product, User user, CartItem cartItem) throws DAOException {
         if (user.isUserSession()) {
             Order order = new Order();
+            order.setOrderId(orderId++);
             order.setProduct(product);
             order.setUser(user);
             order.setOrderQuantity(cartItem.getQuantityItem());
@@ -31,13 +35,11 @@ public class OrderView {
             orderService.addOrder(order);
 
             if (orderService.showOrder(user).contains(order)) {
-                System.out.println(" - Order details -");
-                System.out.println("Order id: " + order.getOrderId() + "\nArticle: " + order.getProduct().getArticle() + "\nName: " + order.getProduct().getName() +
-                        "\nSupplier name: " + order.getProduct().getSupplierName() + "\nTotal Price(BYN): " + order.getProduct().getProductPrice() + "Status: Ordered");
+                logger.info("Order:  " + "ID: " + order.getOrderId() + "\t" + product.getArticle() + "\t" + product.getName() + "  - Successfully added\n");
             }
         }
         else {
-            System.out.println("Login to continue");
+            logger.info("Login to continue");
         }
     }
 
@@ -45,16 +47,23 @@ public class OrderView {
         if (user.isUserSession()) {
             List<Order> orderList = orderService.showOrder(user);
             if (orderList.size() != 0) {
-                Product product;
-                System.out.println(" - My Orders -");
+                logger.info(" - My Orders -\n");
                 for (var order : orderList) {
-                    product = productService.productById(order.getProduct().getProductId());
-                    System.out.println("ID: " + order.getOrderId() + "\t" + product.getName());
+                    logger.info("Order id: " + order.getOrderId());
+                    logger.info("Article: " + order.getProduct().getArticle());
+                    logger.info("Name: " + order.getProduct().getName());
+                    logger.info("Supplier name: " + order.getProduct().getSupplierName());
+                    logger.info("Quantity: " + order.getOrderQuantity());
+                    logger.info("Total Price(BYN): " + order.getOrderTotal());
+                    logger.info("Status: Ordered\n");
                 }
+            }
+            else {
+                logger.info("You have not made any order yet\n");
             }
         }
         else {
-            System.out.println("Login to continue");
+            logger.info("Login to continue");
         }
     }
 
@@ -62,11 +71,11 @@ public class OrderView {
         if (user.isUserSession()) {
             Order order = orderService.searchOrder(orderId);
             Product product = productService.productById(order.getProduct().getProductId());
-            System.out.println(" - Order Details -");
+            logger.info(" - Order Details -");
             System.out.println("Order id: " + orderId + "\nArticle: " + product.getArticle() + "\nName: " + product.getName() +
                     "\nSupplier name: " + product.getSupplierName() + "\nQuantity: " + order.getOrderQuantity() + "\nTotal Price(BYN): " +
                     order.getOrderTotal() + "Order status: " + order.getOrderStatus().getOrderStatusType());
-            System.out.println("1. Change status\n2. Back\nEnter your choice: ");
+            logger.info("1. Change status\n2. Back\nEnter your choice: ");
             int choice = input.nextInt();
             switch (choice) {
                 case 1:
@@ -77,7 +86,7 @@ public class OrderView {
 
         }
         else {
-            System.out.println("Login to continue");
+            logger.info("Login to continue");
         }
     }
 }
