@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<devices xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:NoNamespaceSchemaLocation="computer.xsd">
+    <device id="1">
+        <name>Processor</name>
+        <origin>USA</origin>
+        <price>380</price>
+        <type>
+            <peripheral>NOT_PERIPHERAL</peripheral>
+            <powerUsage>15</powerUsage>
+            <cooler>false</cooler>
+            <group>MULTIMEDIA</group>
+            <port>NO_PORT</port>
+        </type>
+        <critical>true</critical>
+    </device>
+    <device id="2">
+        <name>Keyboard</name>
+        <origin>Switz</origin>
+        <price>562</price>
+        <type>
+            <peripheral>PERIPHERAL</peripheral>
+            <powerUsage>1</powerUsage>
+            <cooler>false</cooler>
+            <group>IO_DEVICE</group>
+            <port>USB</port>
+        </type>
+        <critical>false</critical>
+    </device>
+    <device id="3">
+        <name>Monitor</name>
+        <origin>China</origin>
+        <price>649</price>
+        <type>
+            <peripheral>PERIPHERAL</peripheral>
+            <powerUsage>130</powerUsage>
+            <cooler>false</cooler>
+            <group>IO_DEVICE</group>
+            <port>HDMI</port>
+        </type>
+        <critical>false</critical>
+    </device>
+    <device id="4">
+        <name>Video card</name>
+        <origin>Taiwan</origin>
+        <price>7552</price>
+        <type>
+            <peripheral>NOT_PERIPHERAL</peripheral>
+            <powerUsage>750</powerUsage>
+            <cooler>true</cooler>
+            <group>MULTIMEDIA</group>
+            <port>HDMI</port>
+        </type>
+        <critical>false</critical>
+    </device>
+    <device id="5">
+        <name>RAM</name>
+        <origin>USA</origin>
+        <price>372</price>
+        <type>
+            <peripheral>NOT_PERIPHERAL</peripheral>
+            <powerUsage>1.35</powerUsage>
+            <cooler>false</cooler>
+            <group>MULTIMEDIA</group>
+            <port>NO_PORT</port>
+        </type>
+        <critical>true</critical>
+    </device>
+    <device id="6">
+        <name>Computer mouse</name>
+        <origin>USA</origin>
+        <price>207</price>
+        <type>
+            <peripheral>PERIPHERAL</peripheral>
+            <powerUsage>1</powerUsage>
+            <cooler>false</cooler>
+            <group>IO_DEVICE</group>
+            <port>USB</port>
+        </type>
+        <critical>false</critical>
+    </device>
+    <device id="7">
+        <name>Power unit</name>
+        <origin>Germany</origin>
+        <price>834</price>
+        <type>
+            <peripheral>NOT_PERIPHERAL</peripheral>
+            <powerUsage>1250</powerUsage>
+            <cooler>true</cooler>
+            <group>MULTIMEDIA</group>
+            <port>NO_PORT</port>
+        </type>
+        <critical>true</critical>
+    </device>
+    <device id="8">
+        <name>Motherboard</name>
+        <origin>Taiwan</origin>
+        <price>566</price>
+        <type>
+            <peripheral>NOT_PERIPHERAL</peripheral>
+            <powerUsage>50</powerUsage>
+            <cooler>false</cooler>
+            <group>MULTIMEDIA</group>
+            <port>USB</port>
+        </type>
+        <critical>true</critical>
+    </device>
+</devices>

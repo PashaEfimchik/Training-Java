@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="devices">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:integer"/>
+                <xsd:element name="name" type="xsd:string"/>
+                <xsd:element name="origin" type="xsd:string"/>
+                <xsd:element name="price" type="xsd:float"/>
+                <xsd:element name="critical" type="xsd:boolean"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="type">
+        <xsd:sequence>
+            <xsd:element name="peripheral" type="xsd:string"/>
+            <xsd:element name="powerUsage" type="xsd:float"/>
+            <xsd:element name="cooler" type="xsd:boolean"/>
+            <xsd:element name="group" type="xsd:string"/>
+            <xsd:element name="port" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
