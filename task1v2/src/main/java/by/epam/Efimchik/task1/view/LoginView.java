@@ -26,7 +26,7 @@ public class LoginView {
         User user = new User();
 
         logger.info("Enter id: ");
-        user.setUserId(validData.isValidInteger(input.next()));
+        user.setUserId(validData.isValidUserId(validData.isValidInteger(input.next())));
 
         logger.info("Enter e-mail: ");
         user.setEmail(validData.isValidEmail(input.next()));

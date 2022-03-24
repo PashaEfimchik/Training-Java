@@ -41,6 +41,10 @@ public class UserService {
         userDAO.remove(id);
     }
 
+    public boolean isValidId(int id) throws DAOException {
+        return userDAO.allUsers().contains(userDAO.userById(id));
+    }
+
     public boolean isValidUsername(String username) throws DAOException {
         return username.matches("^[A-Za-z]\\w{5,29}$");
 

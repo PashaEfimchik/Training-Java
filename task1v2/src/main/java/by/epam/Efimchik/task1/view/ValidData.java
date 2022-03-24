@@ -23,9 +23,21 @@ public class ValidData {
                 return Integer.parseInt(id);
             }
             else {
-                logger.info("Wrong input. ID must be an integer!");
-                logger.info("Enter user id again: ");
+                logger.info("Wrong input. Value must be an integer! Try again. . .");
                 id = input.next();
+            }
+        }
+    }
+
+    public int isValidUserId(int id) throws DAOException {
+        while (true) {
+            if (!userService.isValidId(id)) {
+                return id;
+            }
+            else {
+                logger.info("User with this ID already exists.");
+                logger.info("Enter ID again: ");
+                id = isValidInteger(input.next());
             }
         }
     }
