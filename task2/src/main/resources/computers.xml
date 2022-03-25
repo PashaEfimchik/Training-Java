@@ -12,6 +12,7 @@
             <port>NO_PORT</port>
         </type>
         <critical>true</critical>
+        <dateTime>2022-03-25 11:05:01</dateTime>
     </device>
     <device id="2">
         <name>Keyboard</name>
@@ -25,6 +26,7 @@
             <port>USB</port>
         </type>
         <critical>false</critical>
+        <dateTime>2021-05-15 12:25:51</dateTime>
     </device>
     <device id="3">
         <name>Monitor</name>
@@ -38,6 +40,7 @@
             <port>HDMI</port>
         </type>
         <critical>false</critical>
+        <dateTime>2022-11-26 08:00:10</dateTime>
     </device>
     <device id="4">
         <name>Video card</name>
@@ -51,6 +54,7 @@
             <port>HDMI</port>
         </type>
         <critical>false</critical>
+        <dateTime>2020-02-20 16:27:38</dateTime>
     </device>
     <device id="5">
         <name>RAM</name>
@@ -64,6 +68,7 @@
             <port>NO_PORT</port>
         </type>
         <critical>true</critical>
+        <dateTime>2019-09-27 15:35:00</dateTime>
     </device>
     <device id="6">
         <name>Computer mouse</name>
@@ -77,6 +82,7 @@
             <port>USB</port>
         </type>
         <critical>false</critical>
+        <dateTime>2022-12-14 15:42:55</dateTime>
     </device>
     <device id="7">
         <name>Power unit</name>
@@ -90,6 +96,7 @@
             <port>NO_PORT</port>
         </type>
         <critical>true</critical>
+        <dateTime>2020-07-19 21:14:28</dateTime>
     </device>
     <device id="8">
         <name>Motherboard</name>
@@ -103,5 +110,6 @@
             <port>USB</port>
         </type>
         <critical>true</critical>
+        <dateTime>2022-12-22 17:43:12</dateTime>
     </device>
 </devices>

@@ -16,8 +16,11 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class StAXParser {
     public List<ComputerPart> readXMLStaxParser (){
@@ -71,6 +74,10 @@ public class StAXParser {
                     else if ("critical".equals(startElement.getName().getLocalPart())) {
                         xmlEvent = xmlEventReader.nextEvent();
                         computerPart.setCritical(Boolean.parseBoolean(xmlEvent.asCharacters().getData()));
+                    }
+                    else if ("dateTime".equals(startElement.getName().getLocalPart())){
+                        xmlEvent = xmlEventReader.nextEvent();
+                        computerPart.setDate(LocalDateTime.parse(String.valueOf(xmlEvent.asCharacters().getData()), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.UK)));
                     }
                 }
                 if (xmlEvent.isEndElement()) {

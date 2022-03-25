@@ -14,5 +14,12 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.17.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.17.1" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.22" level="project" />
+    <orderEntry type="library" name="Maven: com.addicticks.oss.jaxb:java8datetime:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.andromda.thirdparty.jaxb2_commons:xml-element-wrapper:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.1.10" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-xjc:2.1.10" level="project" />
   </component>
 </module>

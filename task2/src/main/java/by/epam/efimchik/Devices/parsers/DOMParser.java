@@ -15,8 +15,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DOMParser {
     public List<ComputerPart> readXmlDomParser() throws ParserConfigurationException, IOException, SAXException {
@@ -49,6 +55,8 @@ public class DOMParser {
                 computerPart.setGroup(Group.valueOf(element.getElementsByTagName("group").item(0).getTextContent()));
                 computerPart.setPort(Port.valueOf(element.getElementsByTagName("port").item(0).getTextContent()));
                 computerPart.setCritical(Boolean.parseBoolean(element.getElementsByTagName("critical").item(0).getTextContent()));
+
+                computerPart.setDate(LocalDateTime.parse(String.valueOf(element.getElementsByTagName("dateTime").item(0).getTextContent()), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.UK)));
 
                 computerParts.add(computerPart);
             }

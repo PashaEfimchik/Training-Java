@@ -4,6 +4,7 @@ import by.epam.efimchik.Devices.entity.ComputerPart;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ShowData {
@@ -22,7 +23,8 @@ public class ShowData {
                 logger.info("\tDevice cooler: " + device.isCooler());
                 logger.info("\tDevice group: " + device.getGroup());
                 logger.info("\tDevice port: " + device.getPort());
-                logger.info("Device critical: " + device.isCritical() + "\n");
+                logger.info("Device critical: " + device.isCritical());
+                logger.info("Device time: " + device.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "\n");
             }
         }
         else{

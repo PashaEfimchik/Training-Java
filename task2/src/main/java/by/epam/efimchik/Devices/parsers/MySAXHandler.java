@@ -18,6 +18,7 @@ public class MySAXHandler extends DefaultHandler {
     private boolean foundGroup = false;
     private boolean foundPort = false;
     private boolean foundCritical = false;
+    private boolean foundDateTime = false;
 
     @Override
     public void startElement(String uri, String localName, String qName,
@@ -63,6 +64,11 @@ public class MySAXHandler extends DefaultHandler {
         if ("critical".equals(qName)) {
             foundCritical = true;
         }
+
+        if ("dateTime".equals(qName)){
+            foundDateTime = true;
+        }
+
     }
 
     @Override
@@ -113,6 +119,9 @@ public class MySAXHandler extends DefaultHandler {
             logger.info("critical: " + new String(ch, start, length));
             foundCritical = false;
         }
-
+        if(foundDateTime){
+            logger.info("dateTime: " + new String(ch, start, length));
+            foundDateTime = false;
+        }
     }
 }

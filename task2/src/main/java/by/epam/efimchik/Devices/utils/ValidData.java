@@ -22,4 +22,28 @@ public class ValidData {
             }
         }
     }
+
+    public String isValidString(String str) {
+        while (true) {
+            if(str.matches("[A-Za-z]")){
+                return str;
+            }
+            else {
+                logger.warn("Wrong input. Value must be an String! Try again. . .");
+                str = input.next();
+            }
+        }
+    }
+
+    public float isValidFloat(String flt) {
+        while (true) {
+            if(flt.matches("([0-9]+\\.?[0-9]*|\\.[0-9]+)$")){
+                return Float.parseFloat(flt);
+            }
+            else {
+                logger.warn("Wrong input. Value must be an Float! Try again. . .");
+                flt = input.next();
+            }
+        }
+    }
 }
