@@ -1,13 +1,12 @@
 package by.epam.efimchik.Information_handling.service.impl;
 
+import by.epam.efimchik.Information_handling.entity.ComponentType;
+import by.epam.efimchik.Information_handling.entity.IComponent;
 import by.epam.efimchik.Information_handling.entity.impl.CompositeText;
 import by.epam.efimchik.Information_handling.service.IService;
 
-import java.awt.*;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,8 +24,8 @@ public class TextService implements IService<CompositeText> {
     }
 
     @Override
-    public TextComposite sort(TextComposite textComposite) {
-        List<TextComponent> components = textComposite
+    public CompositeText sort(CompositeText textComposite) {
+        List<IComponent> components = textComposite
                 .getComponents()
                 .stream()
                 .sorted(Comparator.comparingInt(p -> p.getComponents().size()))
@@ -40,23 +39,23 @@ public class TextService implements IService<CompositeText> {
     }
 
     @Override
-    public String findSentenceWithLongestWord(TextComposite textComposite) {
-        List<TextComponent> sentences = findAllByType(textComposite, TextComponentType.SENTENCE);
+    public String findSentenceWithLongestWord(CompositeText textComposite) {
+        List<IComponent> sentences = findAllByType(textComposite, ComponentType.SENTENCE);
         sentences.forEach(s ->
                 s.getComponents().forEach(c -> {
                     int cLength = c.getComponents().size();
-                    if(c.getComponentType() == TextComponentType.LEXEME ) {
-                        TextComponent word = c.getComponents()
+                    if(c.getComponentType() == ComponentType.LEXEME ) {
+                        IComponent word = c.getComponents()
                                 .stream()
-                                .filter(c1 -> c.getComponentType() == TextComponentType.WORD)
+                                .filter(c1 -> c.getComponentType() == ComponentType.WORD)
                                 .findFirst()
-                                .orElse(new TextComposite(TextComponentType.WORD));
-                        int length = word.getComponents().size();
+                                .orElse(new CompositeText(ComponentType.WORD));
+                        int length = ((IComponent) word).getComponents().size();
                         if(length > lengthWord) {
                             lengthWord = length;
                             sentence = s.toString();
                         }
-                    } else if(c.getComponentType() == TextComponentType.WORD && cLength > lengthWord) {
+                    } else if(c.getComponentType() == ComponentType.WORD && cLength > lengthWord) {
                         lengthWord = cLength;
                         sentence = s.toString();
                     }
@@ -66,16 +65,16 @@ public class TextService implements IService<CompositeText> {
     }
 
     @Override
-    public void removeSentenceWithNumberWordsLess(TextComposite textComposite, int wordsNumber) {
+    public void removeSentenceWithNumberWordsLess(CompositeText textComposite, int wordsNumber) {
         textComposite.getComponents().forEach(p ->
                 p.getComponents().removeIf(s ->
                         s.getComponents().size() < wordsNumber));
     }
 
     @Override
-    public Map<String, Integer> findSameWords(TextComposite textComposite) {
+    public Map<String, Integer> findSameWords(CompositeText textComposite) {
         Map<String, Integer> repeatedWords = new ConcurrentHashMap<>();
-        List<TextComponent> allWords = findAllByType(textComposite, TextComponentType.WORD);
+        List<IComponent> allWords = findAllByType(textComposite, ComponentType.WORD);
 
         allWords.stream()
                 .map(c -> c.toString().toLowerCase().trim())
@@ -94,7 +93,7 @@ public class TextService implements IService<CompositeText> {
     }
 
     @Override
-    public Map<String, Integer> findConsonantsAndVowelsNumber(TextComposite textComposite) {
+    public Map<String, Integer> findConsonantsAndVowelsNumber(CompositeText textComposite) {
         String vowelsKey = "vowels";
         String consonantsKey = "consonants";
         int startValue = 0;
@@ -103,7 +102,7 @@ public class TextService implements IService<CompositeText> {
         lettersNumber.put(vowelsKey, startValue);
         lettersNumber.put(consonantsKey, startValue);
 
-        List<TextComponent> letters = findAllByType(textComposite, TextComponentType.LETTER);
+        List<IComponent> letters = findAllByType(textComposite, ComponentType.LETTER);
         Pattern vowelPattern = Pattern.compile(VOWELS);
         letters.forEach(l -> {
             Matcher matcher = vowelPattern.matcher(String.valueOf(l).toLowerCase());
@@ -120,19 +119,19 @@ public class TextService implements IService<CompositeText> {
         return lettersNumber;
     }
 
-    private List<TextComponent> findAllByType(TextComponent component, TextComponentType type) {
-        List<TextComponent> components = new ArrayList<>();
+    private List<IComponent> findAllByType(IComponent component, ComponentType type) {
+        List<IComponent> components = new ArrayList<>();
         component.getComponents().forEach(c -> findByType(components, c, type));
 
         return components;
     }
 
-    private void findByType(List<TextComponent> components, TextComponent component, TextComponentType componentType) {
+    private void findByType(List<IComponent> components, IComponent component, ComponentType componentType) {
         component.getComponents().forEach(c -> {
-            TextComponentType type = c.getComponentType();
+            ComponentType type = c.getComponentType();
             if(type == componentType) {
                 components.add(c);
-            } else if(type != TextComponentType.LETTER && type != TextComponentType.PUNCTUATION && type != TextComponentType.DIGIT){
+            } else if(type != ComponentType.LETTER && type != ComponentType.PUNCTUATION){
                 findByType(components, c, componentType);
             }
         });

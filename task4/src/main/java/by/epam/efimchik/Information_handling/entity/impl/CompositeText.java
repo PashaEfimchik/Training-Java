@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CompositeText implements IComponent<IComponent> {
+public class CompositeText implements IComponent {
     private List<IComponent> components = new ArrayList<>();
     private ComponentType componentType;
 
@@ -16,7 +16,7 @@ public class CompositeText implements IComponent<IComponent> {
     }
 
     @Override
-    public ComponentType getCompositeType() {
+    public ComponentType getComponentType() {
         return componentType;
     }
 

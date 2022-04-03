@@ -6,7 +6,6 @@ public enum ComponentType {
     SENTENCE("", ""),
     LEXEME("", ""),
     WORD("\s", ""),
-    DIGIT("", ""),
     LETTER("", ""),
     PUNCTUATION("","");
 
@@ -18,7 +17,7 @@ public enum ComponentType {
 
     ComponentType(String before, String after) {
         this.before = before;
-        after = after;
+        this.after = after;
     }
 
     public String getBefore() {

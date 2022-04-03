@@ -5,7 +5,7 @@ import by.epam.efimchik.Information_handling.entity.ComponentType;
 
 import java.util.List;
 
-public class SymbolText implements IComponent<IComponent> {
+public class SymbolText implements IComponent {
     private ComponentType componentType;
     private char symbol;
 
@@ -15,7 +15,7 @@ public class SymbolText implements IComponent<IComponent> {
     }
 
     @Override
-    public ComponentType getCompositeType(){
+    public ComponentType getComponentType(){
         return componentType;
     }
 

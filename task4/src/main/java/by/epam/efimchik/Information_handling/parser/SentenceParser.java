@@ -12,26 +12,19 @@ import java.util.regex.Pattern;
 public class SentenceParser extends AbstractParser{
     static final String SENTENCE_SEPARATOR_REGEX = "\s+";
     static final String WORD_REGEX = "([\\wа-яА-Я]+[-']?[\\wа-яА-Я]+)|[\\wа-яА-Я]+";
-    static final String EXPRESSION_REGEX = "[\\W\\d&&[^а-яА-Я]]{3,}";
 
     @Override
-    IComponent parse(String sentence) {
+    public IComponent parse(String sentence) {
         List<String> lexemes = Arrays.asList(sentence.split(SENTENCE_SEPARATOR_REGEX));
         IComponent sentenceComposite = new CompositeText(ComponentType.SENTENCE.SENTENCE);
         Pattern wordPattern = Pattern.compile(WORD_REGEX);
-        Pattern expressPattern = Pattern.compile(EXPRESSION_REGEX);
         lexemes.forEach(l -> {
             Matcher wordMatcher = wordPattern.matcher(l);
-            Matcher expressMatcher = expressPattern.matcher(l);
 
             if(wordMatcher.matches()) {
                 changeParser(new WordParser());
                 IComponent word = nextParser.passNext(l);
                 sentenceComposite.add(word);
-            /*} else if(expressMatcher.matches()) {
-                ExpressionParser expressionParser = new ExpressionParser();
-                TextComponent expression = expressionParser.passNext(l);
-                sentenceComposite.add(expression);*/
             } else if(!l.isEmpty()) {
                 changeParser(new LexemeParser());
                 IComponent lexeme = nextParser.passNext(l);

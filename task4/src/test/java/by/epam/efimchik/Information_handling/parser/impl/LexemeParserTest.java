@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class LexemeParserTest {
     private static String text;
-    private Handler component;
+    //private Handler component;
 
     @BeforeEach
     void setUp() {

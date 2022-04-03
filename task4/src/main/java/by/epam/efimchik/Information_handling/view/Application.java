@@ -1,11 +1,20 @@
 package by.epam.efimchik.Information_handling.view;
 
+import by.epam.efimchik.Information_handling.entity.IComponent;
+import by.epam.efimchik.Information_handling.entity.impl.CompositeText;
 import by.epam.efimchik.Information_handling.exception.CompositeException;
-import by.epam.efimchik.Information_handling.parser.factory.TextComponentParserFactory;
+import by.epam.efimchik.Information_handling.parser.TextParser;
 import by.epam.efimchik.Information_handling.reader.FileReader;
+import by.epam.efimchik.Information_handling.service.impl.TextService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
+
 
 public class Application {
-    /*private FileReader fileReader;
+    final Logger logger = LogManager.getLogger();
+    private FileReader fileReader;
     private String text;
 
     {
@@ -15,13 +24,29 @@ public class Application {
         } catch (CompositeException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     public void Start () throws CompositeException {
-        String text = new FileReader().readFile("src\\main\\resources\\file\\input.txt");
-        Handler textParser = TextComponentParserFactory.create();
-        TextImpl textComponent = new TextImpl();
-        textParser.parse(textComponent, text);
-        System.out.println(textComponent);
+        TextService textService = TextService.getInstance();
+        TextParser textParser = new TextParser();
+        IComponent component = textParser.parse(text);
+
+        logger.info(text);
+
+        CompositeText compositeText = textService.sort((CompositeText) component);
+        logger.info(compositeText);
+
+        String sentenceWithLongestWord = textService.findSentenceWithLongestWord((CompositeText) component);
+        logger.info(sentenceWithLongestWord);
+
+        Map<String, Integer> lettersNumber = textService.findConsonantsAndVowelsNumber((CompositeText) component);
+        logger.info(lettersNumber);
+
+        Map<String, Integer> sameWords = textService.findSameWords((CompositeText) component);
+        logger.info(sameWords);
+
+        textService.removeSentenceWithNumberWordsLess((CompositeText) component, 5);
+        logger.info(component);
+
     }
 }

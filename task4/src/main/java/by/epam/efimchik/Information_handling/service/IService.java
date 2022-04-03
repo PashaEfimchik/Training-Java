@@ -1,11 +1,9 @@
 package by.epam.efimchik.Information_handling.service;
 
-import by.epam.efimchik.Information_handling.component.type.CompositeText;
-
 import java.util.Map;
 
 public interface IService<T> {
-    CompositeText sort(T t);
+    T sort(T t);
 
     String findSentenceWithLongestWord(T t);
 
