@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ferries>
+    <ferry>
+        <platformLoadCapacity>8000</platformLoadCapacity>
+        <platformArea>60</platformArea>
+    </ferry>
+</ferries>
